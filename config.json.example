@@ -1,0 +1,9 @@
+{
+    "startAfter": 120,
+    "waitToCheck": 180,
+    "errorRetry": 60,
+    "mailSubject": "Server ip changed!",
+    "sender": "sender@example.com",
+    "senderPass": "senderPassword",
+    "receiver": "receiver@example.com"
+}
