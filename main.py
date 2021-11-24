@@ -13,9 +13,19 @@ def checkArgv():
     for a in argv:
         if a == "-t":
             config.startAfter = 0
+            config.waitToCheck = 0
+        elif a == "-n":
+            global getNewIp
+            getNewIp = True
 
+getNewIp = False
 def GetIPV4Retry():
-    ip = IPHelper.GetIPV4()
+    global getNewIp
+    if getNewIp:
+        ip = "refreshPls!"
+        getNewIp = False
+    else:
+        ip = IPHelper.GetIPV4()
     while ip == "error":
         print(f"Can't get ip, retry in {config.errorRetry}.")
         time.sleep(config.errorRetry)
@@ -23,7 +33,7 @@ def GetIPV4Retry():
     return ip
 
 if __name__ == "__main__":
-    print("AutoIP v1.0")
+    print("AutoIP v1.1")
     checkArgv()
     configManager.printConfig(config)
     gmail.SetEmail(config.sender,config.senderPass,config.receiver)
