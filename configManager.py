@@ -1,6 +1,8 @@
 import os, json
 from sys import stdout
 
+globalConfig = None
+
 class config(object):
     def __init__(self, a,b,c,d,e,f,g):
         self.startAfter = a
@@ -14,10 +16,14 @@ class config(object):
 def jsonToConfig(d):
     return config(d['startAfter'],d['waitToCheck'],d['errorRetry'],d['mailSubject'],d['sender'],d['senderPass'],d['receiver'])
 
-def loadConfig(configFile):
+def loadConfig(configFile)->config:
     with open(configFile) as f:
-        config = json.load(f, object_hook=jsonToConfig)
-        return config
+        global globalConfig
+        globalConfig = json.load(f, object_hook=jsonToConfig)
+        return globalConfig
+
+def getConfig()->config:
+    return globalConfig
 
 def printConfig(config):
     print("=========================")
