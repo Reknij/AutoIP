@@ -33,10 +33,9 @@ def GetIPV4Retry():
     return ip
 
 if __name__ == "__main__":
-    print("AutoIP v1.1")
+    print("AutoIP v1.2")
     checkArgv()
     configManager.printConfig(config)
-    gmail.SetEmail(config.sender,config.senderPass,config.receiver)
     print(f"First run script. Trying get ipv4 after {config.startAfter} seconds.")
     time.sleep(config.startAfter)
     ip = GetIPV4Retry()
