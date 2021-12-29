@@ -3,9 +3,9 @@
 import time
 from sys import argv
 from functools import partial
-import configManager, IPHelper, gmail
+import configModule.configManager as configManager, IPHelper, gmail
 
-config = configManager.loadConfig("/etc/AutoIP/config.json")
+config = configManager.getConfig()
 
 print = partial(print, flush=True)
 
@@ -33,7 +33,6 @@ def GetIPV4Retry():
     return ip
 
 if __name__ == "__main__":
-    print("AutoIP v1.2")
     checkArgv()
     configManager.printConfig(config)
     print(f"First run script. Trying get ipv4 after {config.startAfter} seconds.")
